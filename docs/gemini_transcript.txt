@@ -1,0 +1,598 @@
+- main:
+  - link "New chat":
+    - /url: /
+    - generic: Gemini
+  - text: side_nav_expand
+  - generic: play_arrow
+  - button "Sign in":
+    - generic: Sign in
+  - navigation "Side Navigation":
+    - button "Close sidebar" [expanded]:
+      - img: side_nav
+    - navigation "Main actions menu":
+      - link "New chat":
+        - /url: /app
+        - img: gemini_chat
+        - generic: New chat
+    - text: image_create
+    - navigation "Additional actions menu":
+      - link "Images":
+        - /url: /images
+        - img: image_create
+        - generic: Images
+    - img: info
+    - link "Sign in":
+      - /url: "#"
+    - text: to save activity
+    - button "About Gemini":
+      - img: spark_outline
+      - generic: About Gemini
+    - button "Get Gemini App":
+      - img: download
+      - generic: Get Gemini App
+    - button "Pricing":
+      - img: sell
+      - generic: Pricing
+    - button "For Business":
+      - img: work
+      - generic: For Business
+    - button "Sign in":
+      - generic: Sign in
+    - button "Settings":
+      - img: settings
+  - heading "Conversation with Gemini" [level=1]
+  - heading "You said For a left-to-right running-total calculator, propose six key sequences with the expected display af…" [level=5]
+  - paragraph: For a left-to-right running-total calculator, propose six key sequences with the expected display after each operator and after equals. Include 2 + 3 × 4, repeated operators, equals without a new operand, and AC reset. Identify which are core contract tests and which need optional error handling.
+  - button "Expand":
+    - img: expand_more
+  - button "Copy prompt":
+    - img: copy
+  - button "Edit":
+    - img: edit
+  - heading "Gemini said" [level=6]
+  - paragraph: For a left-to-right running-total calculator (where operations are evaluated sequentially as entered without algebraic precedence like PEMDAS), here are six key sequences detailing the expected display after each step, along with their testing classification.
+  - heading "1. Standard Left-to-Right Evaluation ( 2 + 3 × 4 = )" [level=3]:
+    - text: 1. Standard Left-to-Right Evaluation (
+    - code: 2 + 3 × 4 =
+    - text: )
+  - paragraph: Demonstrates core sequential calculation where intermediate results are computed immediately upon pressing the next operator.
+  - list:
+    - paragraph:
+      - code: "2"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "2"
+    - paragraph:
+      - code: +
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "2"
+      - text: "(Accumulator stores 2; pending operation:"
+      - code: +
+      - text: )
+    - paragraph:
+      - code: "3"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "3"
+      - text: (Current input)
+    - paragraph:
+      - code: ×
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "5"
+      - text: (Computes
+      - code: 2 + 3
+      - text: ", updates accumulator to 5; pending operation:"
+      - code: ×
+      - text: )
+    - paragraph:
+      - code: "4"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "4"
+      - text: (Current input)
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "20"
+      - text: (Computes
+      - code: 5 × 4
+      - text: )
+    - paragraph: "Classification: Core Contract Test"
+  - heading "2. Operator Overwriting (Repeated Operators)" [level=3]
+  - paragraph: Tests whether pressing consecutive operators correctly replaces the pending operation rather than triggering an immediate computation.
+  - list:
+    - paragraph:
+      - code: "5"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "5"
+    - paragraph:
+      - code: +
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "5"
+      - text: "(Pending operation:"
+      - code: +
+      - text: )
+    - paragraph:
+      - code: "-"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "5"
+      - text: (Replaces pending operation from
+      - code: +
+      - text: to
+      - code: "-"
+      - text: )
+    - paragraph:
+      - code: "3"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "3"
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "2"
+      - text: (Computes
+      - code: 5 - 3
+      - text: )
+    - paragraph: "Classification: Core Contract Test"
+  - heading "3. Repeat Last Operation ( = Without New Operand)" [level=3]:
+    - text: 3. Repeat Last Operation (
+    - code: =
+    - text: Without New Operand)
+  - paragraph:
+    - text: Tests calculator memory for repeating the last binary operation when
+    - code: =
+    - text: is pressed repeatedly.
+  - list:
+    - paragraph:
+      - code: "4"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "4"
+    - paragraph:
+      - code: +
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "4"
+    - paragraph:
+      - code: "2"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "2"
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "6"
+      - text: (Computes
+      - code: 4 + 2
+      - text: )
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "8"
+      - text: (Repeats
+      - code: + 2
+      - text: on the previous result)
+    - paragraph: "Classification: Core Contract Test"
+  - heading "4. All-Clear (AC) Reset Mid-Sequence" [level=3]
+  - paragraph: Ensures that an AC button press completely flushes the accumulator, current input, and pending operations back to the initial state.
+  - list:
+    - paragraph:
+      - code: "9"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "9"
+    - paragraph:
+      - code: +
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "9"
+    - paragraph:
+      - code: "8"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "8"
+    - paragraph:
+      - code: AC
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "0"
+      - text: (Resets all calculator state)
+    - paragraph:
+      - code: "3"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "3"
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "3"
+      - text: (No active operation;
+      - code: =
+      - text: acts as no-op or echoes input)
+    - paragraph: "Classification: Core Contract Test"
+  - heading "5. Division by Zero" [level=3]
+  - paragraph: Tests robustness when encountering mathematical singularities.
+  - list:
+    - paragraph:
+      - code: "8"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "8"
+    - paragraph:
+      - code: ÷
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "8"
+    - paragraph:
+      - code: "0"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "0"
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: E
+      - text: or
+      - code: Error
+      - text: (Locks input until
+      - code: AC
+      - text: or
+      - code: C
+      - text: is pressed)
+    - paragraph: "Classification: Optional Error Handling (Depending on project scope, basic implementations might let NaN/Infinity propagate, while production calculators require explicit error states)."
+  - heading "6. Intermediate Chaining ( 2 + 3 = × 4 = )" [level=3]:
+    - text: 6. Intermediate Chaining (
+    - code: 2 + 3 = × 4 =
+    - text: )
+  - paragraph:
+    - text: Tests explicit intermediate evaluation via
+    - code: =
+    - text: followed by immediately starting a new operation chain.
+  - list:
+    - paragraph:
+      - code: "2"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "2"
+    - paragraph:
+      - code: +
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "2"
+    - paragraph:
+      - code: "3"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "3"
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "5"
+      - text: (Finalizes
+      - code: 2 + 3
+      - text: )
+    - paragraph:
+      - code: ×
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "5"
+      - text: "(Uses 5 as the new accumulator base; pending operation:"
+      - code: ×
+      - text: )
+    - paragraph:
+      - code: "4"
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "4"
+    - paragraph:
+      - code: =
+      - math:
+        - generic: →
+      - generic: →
+      - text: "Display:"
+      - code: "20"
+      - text: (Computes
+      - code: 5 × 4
+      - text: )
+    - paragraph: "Classification: Core Contract Test"
+  - button "Copy":
+    - img: copy
+  - button "Show more options":
+    - img: more_horiz
+  - heading "You said Review a mobile calculator made of a number/operator button grid, a result display, and a light/dark…" [level=5]
+  - paragraph: Review a mobile calculator made of a number/operator button grid, a result display, and a light/dark theme. Give five specific accessibility checks or changes for TalkBack users, large text, and color-vision differences. Separate what to test from what to change.
+  - button "Copy prompt":
+    - img: copy
+  - button "Edit":
+    - img: edit
+  - heading "Gemini said" [level=6]
+  - paragraph: Here is a review of the mobile calculator layout, categorized into items to Test and actionable items to Change to ensure full accessibility for TalkBack (screen reader) users, low-vision users relying on large text, and individuals with color-vision differences.
+  - 'heading "Part 1: What to Test (Verification Audits)" [level=3]'
+  - list:
+    - paragraph: TalkBack Focus Order and Grouping
+    - list:
+      - paragraph: "Test: Navigate through the calculator grid using swipe gestures with TalkBack enabled."
+      - paragraph: "Expected: The focus must move logically in standard reading order (row-by-row or column-by-column, typically left-to-right, top-to-bottom) rather than jumping around based on the view hierarchy. Ensure the result display is announced whenever it updates."
+    - paragraph: Dynamic Type / Large Text Scalability
+    - list:
+      - paragraph: "Test: Increase the system font size to maximum limits (e.g., 200% scale) in device settings."
+      - paragraph:
+        - text: "Expected: Verify that the result display text scales down or wraps appropriately without clipping, and check that button labels inside the grid do not truncate numbers or operation symbols (like"
+        - code: ÷
+        - text: or
+        - code: ×
+        - text: ).
+    - paragraph: Color Contrast Ratios (WCAG AA/AAA)
+    - list:
+      - paragraph: "Test: Measure the contrast ratio between button text/icons and their background fills in both light and dark themes using an accessibility auditing tool."
+      - paragraph: "Expected: Normal-sized text and icons must meet a minimum contrast ratio of 4.5:1 (or 3:1 for large UI components and graphical symbols) against their background."
+    - paragraph: Information Conveyance Without Color Alone (Color-Vision Differences)
+    - list:
+      - paragraph: "Test: View the calculator UI using a digital color-vision deficiency simulator (simulating protanopia, deuteranopia, or tritanopia)."
+      - paragraph: "Expected: Check that the active theme or operator states (e.g., a selected operator button) are not communicated solely through subtle shifts in hue."
+    - paragraph: Touch Target Sizing
+    - list:
+      - paragraph: "Test: Inspect the bounding box dimensions of every key on the calculator grid."
+      - paragraph: "Expected: Ensure every button provides a minimum touch target size of 48×48dp to accommodate users with motor tremors or large fingers."
+  - 'heading "Part 2: What to Change (Concrete Remediation)" [level=3]'
+  - list:
+    - paragraph: Provide Explicit Content Descriptions for Symbolic Buttons
+    - list:
+      - paragraph:
+        - text: "Change: Screen readers often mispronounce or ignore punctuation symbols. Update the XML/Compose properties of operator buttons so they have explicit accessibility labels (e.g., change"
+        - code: +
+        - text: to content description
+        - code: "\"Plus\""
+        - text: ","
+        - code: "-"
+        - text: to
+        - code: "\"Minus\""
+        - text: ","
+        - code: ×
+        - text: to
+        - code: "\"Multiply\""
+        - text: ","
+        - code: ÷
+        - text: to
+        - code: "\"Divide\""
+        - text: ", and"
+        - code: AC
+        - text: to
+        - code: "\"All Clear\""
+        - text: ).
+    - paragraph: Implement Live Regions for the Result Display
+    - list:
+      - paragraph:
+        - text: "Change: Configure the result display view with an accessibility live region attribute ("
+        - code: accessibilityLiveRegion="polite"
+        - text: on Android). This ensures TalkBack automatically reads out intermediate calculations or final results as soon as they change without requiring the user to manually refocus the screen.
+    - paragraph: Add Non-Color Visual Indicators for Selected States
+    - list:
+      - paragraph: "Change: If an operator button highlights its background color when active, add a secondary non-color indicator—such as a distinct border stroke, a subtle drop shadow, or a scale shift—so users with color-vision deficiencies can easily identify active toggles."
+    - paragraph: Use Flexible Layouts for Button Text and Display
+    - list:
+      - paragraph:
+        - text: "Change: Replace fixed text sizing inside grid buttons with auto-scaling TextViews ("
+        - code: autoSizeTextType="uniform"
+        - text: or equivalent Compose modifiers) and set the result display to shrink text size dynamically (
+        - code: scaledDensity
+        - text: ) when numbers exceed standard lengths, preventing text overflow.
+    - paragraph: Expose Grouped Semantic Roles for Keypads
+    - list:
+      - paragraph: "Change: Ensure the button grid uses proper accessibility grouping (or a custom accessibility delegate) so screen readers announce the layout context if necessary, or treat the keypad as a cohesive grid container where appropriate, preventing redundant announcements of layout wrappers."
+  - paragraph: Would you like help writing automated UI tests or implementation code for any of these accessibility fixes?
+  - button "Copy":
+    - img: copy
+  - button "Show more options":
+    - img: more_horiz
+  - heading "You said For a left-to-right calculator, should chained operations live in one stateful widget, a small calcu…" [level=5]
+  - paragraph: For a left-to-right calculator, should chained operations live in one stateful widget, a small calculator model, or an expression parser? Compare complexity, testability, and extension cost.
+  - button "Copy prompt":
+    - img: copy
+  - button "Edit":
+    - img: edit
+  - heading "Gemini said" [level=6]
+  - paragraph: When building a left-to-right running-total calculator (where operations execute sequentially on each keypress rather than using standard algebraic order of operations like PEMDAS), choosing the right architectural tier is critical.
+  - paragraph: Here is a comparison of the three approaches across Complexity, Testability, and Extension Cost.
+  - heading "1. One Stateful Widget (Monolithic UI Component)" [level=3]
+  - paragraph:
+    - text: All state variables (
+    - code: accumulator
+    - text: ","
+    - code: currentInput
+    - text: ","
+    - code: pendingOperator
+    - text: ) and evaluation logic live directly inside the UI component (e.g., a Flutter
+    - code: StatefulWidget
+    - text: or React component).
+  - list:
+    - paragraph: "Complexity (Low to Medium): Easiest to spin up initially for a basic prototype because there are no separate classes or abstractions to wire up. However, as edge cases pile up (like handling consecutive operators, decimal inputs, or error states), the component quickly devolves into unmaintainable spaghetti code mixing UI rendering with business logic."
+    - paragraph: "Testability (Poor): Because the calculation logic is bound directly to the rendering lifecycle, you cannot easily test calculations in isolation. You are forced to write slower, brittle UI/widget integration tests to verify simple math."
+    - paragraph: "Extension Cost (High): Adding features like a history log, a memory function (M+, M-), or dark/light theme state synchronization becomes painful because everything is locked inside a single bloated component."
+  - heading "2. A Small Calculator Model (Pure State Machine / ViewModel) — Recommended" [level=3]
+  - paragraph:
+    - text: The calculator logic is extracted into a pure, framework-agnostic class or state machine. The UI simply passes user keypresses into the model and observes the resulting state (
+    - code: displayValue
+    - text: ","
+    - code: isError
+    - text: ", etc.)."
+  - list:
+    - paragraph:
+      - text: "Complexity (Low-Moderate): Requires a small upfront architectural split. You define clear state structures and transition methods (e.g.,"
+      - code: pressNumber(n)
+      - text: ","
+      - code: pressOperator(op)
+      - text: ","
+      - code: pressEquals()
+      - text: ).
+    - paragraph:
+      - text: "Testability (Excellent): Flawless. You can write fast, comprehensive unit tests that pass an array of inputs (like"
+      - code: "[\"2\", \"+\", \"3\", \"×\", \"4\", \"=\"]"
+      - text: ) and assert the expected output state directly in memory, requiring zero UI mocking.
+    - paragraph:
+      - text: "Extension Cost (Low): Highly scalable. Adding a backspace ("
+      - code: ⌫
+      - text: ), a sign toggle (
+      - code: ±
+      - text: ), or a rolling calculation history tape is straightforward because the state changes are isolated to a single, predictable domain model.
+  - heading "3. An Expression Parser (Tokenize Parse Evaluate Pipeline)" [level=3]:
+    - text: 3. An Expression Parser (Tokenize
+    - math:
+      - generic: →
+    - generic: →
+    - text: Parse
+    - math:
+      - generic: →
+    - generic: →
+    - text: Evaluate Pipeline)
+  - paragraph: Treats input as a string expression, tokenizes it into numbers and operators, builds an Abstract Syntax Tree (AST), and evaluates it.
+  - list:
+    - paragraph:
+      - text: "Complexity (High): Heavy overkill for a left-to-right sequential calculator. Writing a lexer and parser introduces unnecessary overhead, especially since a true running-total calculator evaluates intermediate totals immediately on each operator press (e.g.,"
+      - code: 2 + 3 × 4
+      - text: equals
+      - code: "20"
+      - text: sequentially, whereas a parser built for precedence would evaluate it as
+      - code: "14"
+      - text: ).
+    - paragraph: "Testability (Good for Parser, Poor for UX State): While the parser functions are unit-testable, handling real-time calculator UX states (like partial inputs, clearing current entries vs. all-clear, and error locking) inside a parser paradigm is awkward and error-prone."
+    - paragraph: "Extension Cost (High for Left-to-Right UX): Paradoxically, while a parser makes it easy to add PEMDAS algebraic precedence, it makes standard left-to-right running-total behavior harder to implement and customize because parsers are naturally designed to defer evaluation until the entire expression string is compiled."
+  - heading "Architectural Comparison Summary" [level=3]
+  - table:
+    - rowgroup:
+      - row "Dimension 1. One Stateful Widget 2. Small Calculator Model 3. Expression Parser":
+        - columnheader "Dimension"
+        - columnheader "1. One Stateful Widget"
+        - columnheader "2. Small Calculator Model"
+        - columnheader "3. Expression Parser"
+    - rowgroup:
+      - row "Initial Complexity Very Low Low-Moderate High":
+        - cell "Initial Complexity":
+          - generic: Initial Complexity
+        - cell "Very Low"
+        - cell "Low-Moderate"
+        - cell "High"
+      - row "Unit Testability Poor (Requires UI test harness) Excellent (Pure logic in isolation) Moderate (Good for strings, hard for UI states)":
+        - cell "Unit Testability":
+          - generic: Unit Testability
+        - cell "Poor (Requires UI test harness)"
+        - cell "Excellent (Pure logic in isolation)":
+          - generic: Excellent (Pure logic in isolation)
+        - cell "Moderate (Good for strings, hard for UI states)"
+      - row "Extension Cost High (Leads to tight coupling) Low (Clean separation of concerns) High (Misaligned with left-to-right running totals)":
+        - cell "Extension Cost":
+          - generic: Extension Cost
+        - cell "High (Leads to tight coupling)"
+        - cell "Low (Clean separation of concerns)":
+          - generic: Low (Clean separation of concerns)
+        - cell "High (Misaligned with left-to-right running totals)"
+      - row "Best Suited For 10-minute throwaway prototypes Production-grade mobile calculators Advanced scientific or expression-evaluating apps":
+        - cell "Best Suited For":
+          - generic: Best Suited For
+        - cell "10-minute throwaway prototypes"
+        - cell "Production-grade mobile calculators":
+          - generic: Production-grade mobile calculators
+        - cell "Advanced scientific or expression-evaluating apps"
+  - button "More options":
+    - img: more_horiz
+  - heading "Recommendation" [level=3]
+  - paragraph: "Go with Option 2 (A Small Calculator Model). It provides the ideal sweet spot: it keeps your code clean, decouples business logic from UI frameworks, and makes unit-testing key sequences trivial."
+  - button "Redo":
+    - img: refresh
+  - button "Copy":
+    - img: copy
+  - button "Show more options":
+    - img: more_horiz
+  - button:
+    - img: arrow_downward
+  - generic: Sign in to connect to Google apps, create images, and more
+  - button "Sign in":
+    - generic: Sign in
+  - textbox "Enter a prompt for Gemini" [active]:
+    - text: Ask Gemini
+    - paragraph
+  - button "Upload & tools":
+    - img: plus
+  - button "Open mode picker, currently Flash-Lite":
+    - generic: Flash-Lite
+    - img: keyboard_arrow_down
+  - button "Dictate (^⇧D)":
+    - img: mic
+  - paragraph: Gemini is AI and can make mistakes.
+- generic: Searching the web
